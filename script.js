@@ -112,7 +112,7 @@ function upload_file() {
 
         var uploadTask = storageRef.put(file);
 
-        document.getElementById("file_name").innerHTML += `<div><i class="fa fa-check-square-o"></i> ${i + 1} : ${file.name} </div>`;
+        // document.getElementById("file_name").innerHTML += `<div><i class="fa fa-check-square-o"></i> ${i + 1} : ${file.name} </div>`;
 
         uploadTask.on('state_changed', function (snapshot) {
 
@@ -124,7 +124,9 @@ function upload_file() {
           console.error('Error uploading:', error);
         }, function () {
 
-          document.getElementById("upload_status").innerHTML = `<div><i class="fa-solid fa-cloud-sun"></i> Uploaded Successfully</div>`
+          document.getElementById("upload_status").innerHTML = `<div><i class="fa-solid fa-cloud-sun"></i> Uploaded Successfully</div>`;
+          
+          document.getElementById("file_name").innerHTML += `<div><i class="fa fa-check-square-o"></i> ${i + 1} : ${file.name} </div>`;
 
           document.getElementById("input_file_option").value = "";
 
