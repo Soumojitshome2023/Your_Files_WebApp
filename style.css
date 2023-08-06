@@ -306,7 +306,7 @@ main {
 
 
 #dlink {
-    border: 3px solid yellow;
+    /* border: 3px solid yellow; */
     display: flex;
     justify-content: center;
     align-items: center;
