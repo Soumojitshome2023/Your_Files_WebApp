@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Sharing App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+
+    <!-- ====================Meta Tags==================== -->
+
+    <meta name="theme-color" content="#a8603e" />
+
+    <meta name="title" content="Your Files Website | Soumojit Shome">
+    <meta name="description" content="Your Files Web | Soumojit Shome">
+    <meta name="keywords" content="your files, soumojit shome">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="5 days">
+    <meta name="author" content="Soumojit Shome">
+
+    <meta itemprop="image" content="https://drive.google.com/uc?export=view&id=1h7dkwvfudYxVFHvdXk0a1j_cmLBR9f9E">
+
+    <meta property="og:title" content="Your Files Web | Soumojit Shome">
+    <meta property="og:site_name" content="Your Files Web | Soumojit Shome">
+    <meta property="og:url" content="https://your-files-webapp-soumojit.vercel.app">
+    <meta property="og:description" content="Your Files Web | Soumojit Shome">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://drive.google.com/uc?export=view&id=1h7dkwvfudYxVFHvdXk0a1j_cmLBR9f9E">
+
+
+
+    <!-- ================================================== -->
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+
+    <script src="https://kit.fontawesome.com/813697e957.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+
+</head>
+
+<body>
+
+    <!-- ==================Main Heading================== -->
+    <section id="heading"><i class="fa-sharp fa-solid fa-share-nodes"></i> Your <span>Files</span></section>
+
+    <!-- ==================Main Section Start================== -->
+    <section id="drag_and_drop_sec">
+        <p><i class="fa fa-upload" aria-hidden="true"></i>
+            Drop file here
+        </p>
+    </section>
+
+    <main>
+
+
+        <!-- ==================Auth Section================== -->
+        <section id="auth_section">
+            <div class="section_heading">
+                Sign In or Sign Up
+            </div>
+
+            <div class="inputContainer">
+                <input required="required" class="inpt" id="user_email_inputField" placeholder="Enter Your Email"
+                    type="email">
+                <label class="usernameLabel" for="user_email_inputField">Enter Your Email</label>
+                <svg viewBox="0 0 448 512" class="userIcon">
+                    <path
+                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
+                    </path>
+                </svg>
+            </div>
+            <div class="inputContainer">
+                <input required="required" class="inpt" id="user_pw_inputField"
+                    placeholder="Create or Enter Your Password" type="password">
+                <label class="usernameLabel" for="user_pw_inputField">Create or Enter Your Password</label>
+                <svg viewBox="0 0 448 512" class="userIcon">
+                    <path
+                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
+                    </path>
+                </svg>
+            </div>
+            <button class="btn" onclick="signIn()">
+                Sign In
+            </button>
+            <button class="btn" onclick="signUp()">
+                Sign Up | Create Account
+            </button>
+            <span id="auth_status"></span>
+
+        </section>
+
+        <!-- ==================Upload & Send Section================== -->
+        <section id="upload_section">
+            <div class="section_heading">
+                Upload Section
+                <p>Drag and Drop Your File Here</p>
+            </div>
+
+            <label for="input_file_option" id="input_file_option_label"><i class='far fa-folder'
+                    style='font-size:24px'></i> Choose Files</label>
+            <input type="file" id="input_file_option" multiple>
+
+            <span id="file_name"></span>
+
+            <button id="upload_file_btn" class="btn" onclick="upload_file()"><i class="fa fa-upload"
+                    aria-hidden="true"></i>
+                Upload
+            </button>
+            <span id="upload_status"></span>
+
+        </section>
+
+
+        <!-- ==================Download & Receive Section================== -->
+        <section id="download_section">
+            <div class="section_heading">Download & Receive</div>
+
+            <button id="get_file_btn" class="btn" onclick="get_file()">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                Get
+            </button>
+
+
+            <span id="your_files_heading"></span>
+
+            <div class="loader" id="data_lodar_ani">
+                <div class="justify-content-center jimu-primary-loading"></div>
+            </div>
+
+
+            <span id="dlink"></span>
+
+        </section>
+
+
+    </main>
+
+    <!-- ==================CopyRight Section================== -->
+    <section id="copyright">
+
+        <a href="https://iamsoumojit.vercel.app" target="_blank">
+            <button class="copyright_btn">
+                <span class="copyright_btn_button-content">Designed by Soumojit Shome</span>
+            </button>
+        </a>
+    </section>
+
+
+</body>
+
+<script src="firebase.js"></script>
+<script src="script.js"></script>
+
+</html>
